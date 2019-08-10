@@ -95,3 +95,54 @@ class PostDetailViewTests(APITestCase):
         post = create_new_post('new post content', user)
         response = self.client.get(reverse('post-detail', args=[1]))
         self.assertContains(response, '"creator":"testuser"')
+
+    def test_post_creator_modify(self):
+        """
+        A post's creator may modify the post.
+        """
+        user = create_new_user(username='testuser')
+        post = create_new_post('new post content', user)
+        self.client.force_authenticate(user=user)
+        response = self.client.put(
+            reverse('post-detail', args=[1]),
+            {'content': 'updated post content'}
+        )
+        self.assertContains(
+            response,
+            '"content":"updated post content"')
+
+    def test_post_not_creator_modify(self):
+        """
+        A user may not modify a different user's post.
+        """
+        user_1 = create_new_user(username='testuser_1')
+        post = create_new_post('new post content', user_1)
+        user_2 = create_new_user(username='testuser_2')
+        self.client.force_authenticate(user=user_2)
+        response = self.client.put(
+            reverse('post-detail', args=[1]),
+            {'content': 'updated post content'}
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_post_creator_delete(self):
+        """
+        A post's creator may delete the post.
+        """
+        user = create_new_user(username='testuser')
+        post = create_new_post('new post content', user)
+        self.client.force_authenticate(user=user)
+        response = self.client.delete(reverse('post-detail', args=[1]))
+        self.assertEqual(response.status_code, 204)
+
+    def test_post_not_creator_delete(self):
+        """
+        A user may not delete a different user's post.
+        """
+        user_1 = create_new_user(username='testuser_1')
+        post = create_new_post('new post content', user_1)
+        user_2 = create_new_user(username='testuser_2')
+        self.client.force_authenticate(user=user_2)
+        response = self.client.delete(reverse('post-detail', args=[1]))
+        self.assertEqual(response.status_code, 403)
+
