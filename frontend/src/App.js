@@ -45,7 +45,9 @@ class ListedPosts extends React.Component {
   componentDidMount() {
     axios.get('http://localhost:8000')
     .then(response => {
-      const data = response.data;
+      const data = response.data.results;
+      const next = response.data.next;
+      const previous = response.data.previous;
       this.setState({posts: data});
     })
     .catch(error => {
