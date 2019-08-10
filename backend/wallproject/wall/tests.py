@@ -168,3 +168,59 @@ class PostDetailViewTests(APITestCase):
         response = self.client.delete(reverse('post-detail', args=[1]))
         self.assertEqual(response.status_code, 403)
 
+
+class UserCreateViewTests(APITestCase):
+    def test_user_creation(self):
+        """
+        Upon successful POST, a new user should be created.
+        """
+        response = self.client.post(
+            reverse('user-create'),
+            {
+                'username': 'testuser',
+                'email': 'test@gmail.com',
+                'password': 'Testing321'
+            }
+        )
+        self.assertEqual(response.status_code, 201)
+
+    def test_user_creation_no_username(self):
+        """
+        Users creation attempts without a username will not succeed.
+        """
+        response = self.client.post(
+            reverse('user-create'),
+            {
+                'email': 'test@gmail.com',
+                'password': 'Testing321'
+            }
+        )
+        self.assertNotEqual(response.status_code, 201)
+
+    def test_user_creation_no_email(self):
+        """
+        Users creation attempts without an email address will not
+        succeed.
+        """
+        response = self.client.post(
+            reverse('user-create'),
+            {
+                'username': 'testuser',
+                'password': 'Testing321'
+            }
+        )
+        self.assertNotEqual(response.status_code, 201)
+
+    def test_user_creation_no_password(self):
+        """
+        Users creation attempts without an email address will not
+        succeed.
+        """
+        response = self.client.post(
+            reverse('user-create'),
+            {
+                'username': 'testuser',
+                'email': 'test@gmail.com',
+            }
+        )
+        self.assertNotEqual(response.status_code, 201)
