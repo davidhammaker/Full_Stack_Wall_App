@@ -1,4 +1,5 @@
 from django.urls import reverse
+from django.core import mail
 from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from .models import Post
@@ -268,3 +269,18 @@ class UserCreateViewTests(APITestCase):
             }
         )
         self.assertNotEqual(response.status_code, 201)
+
+    def test_welcome_email(self):
+        """
+        New users should receive a welcome email.
+        """
+        response = self.client.post(
+            reverse('user-create'),
+            {
+                'username': 'testuser',
+                'email': 'test@gmail.com',
+                'password': 'Testing321'
+            }
+        )
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'Welcome to Wall App!')
