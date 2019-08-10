@@ -67,6 +67,28 @@ class PostListViewTests(APITestCase):
         self.assertContains(response, '"content":"new post content 1"')
         self.assertContains(response, '"content":"new post content 2"')
 
+    def test_authenticated_posts(self):
+        """
+        Authenticated users may submit new posts.
+        """
+        user = create_new_user('testuser')
+        self.client.force_authenticate(user=user)
+        response = self.client.post(
+            reverse('post-list'),
+            {'content': 'test post', 'creator': user}
+        )
+        self.assertEqual(response.status_code, 201)
+
+    def test_unauthenticated_posts(self):
+        """
+        Unauthenticated users may not submit new posts.
+        """
+        response = self.client.post(
+            reverse('post-list'),
+            {'content': 'test post'}
+        )
+        self.assertEqual(response.status_code, 403)
+
 
 class PostDetailViewTests(APITestCase):
     def test_no_post(self):
