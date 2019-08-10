@@ -1,6 +1,6 @@
-from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
+from rest_framework.test import APITestCase
 from .models import Post
 
 
@@ -25,7 +25,7 @@ def create_new_post(content, user):
     return Post.objects.create(content=content, creator=user)
 
 
-class PostListViewTests(TestCase):
+class PostListViewTests(APITestCase):
     def test_no_posts(self):
         """
         If no posts have been made, the API should yield an empty list.
@@ -68,7 +68,7 @@ class PostListViewTests(TestCase):
         self.assertContains(response, '"content":"new post content 2"')
 
 
-class PostDetailViewTests(TestCase):
+class PostDetailViewTests(APITestCase):
     def test_no_post(self):
         """
         If no post matches the URL, the response should be a 404.
