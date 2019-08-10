@@ -1,4 +1,6 @@
+import os
 from rest_framework import generics, permissions
+from django.core.mail import send_mail
 from .models import Post
 from .serializers import PostSerializer, UserSerializer
 from .permissions import IsCreatorOrReadOnly
@@ -24,3 +26,17 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class UserCreate(generics.CreateAPIView):
     serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+        """
+        Send an email upon successful user creation.
+        """
+        serializer.save()
+        send_mail(
+            'Welcome to Wall App!',
+            'Thank you for signing up! You may now log in and post on '
+            'the wall.',
+            os.environ.get('EMAIL_USER'),
+            [serializer.data['email']],
+            fail_silently=False
+        )
