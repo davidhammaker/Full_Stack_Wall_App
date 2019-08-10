@@ -4,11 +4,30 @@ import axios from 'axios';
 
 function Post(props) {
   const post = props.post;
+
+  let dateRaw = props.post.date_posted.toString();
+
+  let year = dateRaw.slice(0, 4);
+  let month = dateRaw.slice(5, 7);
+  let day = dateRaw.slice(8, 10);
+  let hourStr = dateRaw.slice(11, 13);
+  let minute = dateRaw.slice(14, 16);
+
+  let hourNum = parseInt(hourStr);
+  let suffix = 'AM';
+  if (hourNum > 12) {
+    suffix = 'PM';
+    hourNum -= 12;
+  }
+  let hour = hourNum.toString();
+  
+  const dateNew = `${hour}:${minute} ${suffix}, ${month}/${day}/${year}`
+
   return (
     <div className="p-2">
       <h5 className="h-100">{ post.creator }
         <small className="float-right font-italic small-font">
-          { post.date_posted }
+          { dateNew }
         </small>
       </h5>
       <p className="pl-2 large-font">{ post.content }</p>
