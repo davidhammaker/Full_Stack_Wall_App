@@ -8,7 +8,7 @@ urlpatterns = [
         name='post-list'
     ),
     path(
-        'post/<int:pk>/',
+        'posts/<int:pk>/',
         wall_views.PostDetail.as_view(),
         name='post-detail'
     ),
