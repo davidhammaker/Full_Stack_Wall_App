@@ -224,3 +224,47 @@ class UserCreateViewTests(APITestCase):
             }
         )
         self.assertNotEqual(response.status_code, 201)
+
+    def test_user_creation_duplicate_username(self):
+        """
+        Users cannot be created with existing usernames.
+        """
+        _ = self.client.post(
+            reverse('user-create'),
+            {
+                'username': 'testuser',
+                'email': 'test@gmail.com',
+                'password': 'Testing321'
+            }
+        )
+        response = self.client.post(
+            reverse('user-create'),
+            {
+                'username': 'testuser',
+                'email': 'test2@gmail.com',
+                'password': 'Testing321'
+            }
+        )
+        self.assertNotEqual(response.status_code, 201)
+
+    def test_user_creation_duplicate_email(self):
+        """
+        Users cannot be created with existing email addresses.
+        """
+        _ = self.client.post(
+            reverse('user-create'),
+            {
+                'username': 'testuser',
+                'email': 'test@gmail.com',
+                'password': 'Testing321'
+            }
+        )
+        response = self.client.post(
+            reverse('user-create'),
+            {
+                'username': 'testuser2',
+                'email': 'test@gmail.com',
+                'password': 'Testing321'
+            }
+        )
+        self.assertNotEqual(response.status_code, 201)
