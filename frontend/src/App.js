@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 
 function Post(props) {
@@ -69,12 +70,21 @@ class ListedPosts extends React.Component {
 }
 
 
-function App() {
+function Wall(props) {
   return (
     <div className="col-sm-8 mx-auto text-light bg-secondary">
       <h1 className="p-4">Placeholder</h1>
       <ListedPosts />
     </div>
+  )
+}
+
+
+function App() {
+  return (
+    <Router>
+      <Route exact path="/" component={Wall} />
+    </Router>
   );
 }
 
