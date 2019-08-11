@@ -72,9 +72,20 @@ class ListedPosts extends React.Component {
 
 function Wall(props) {
   return (
-    <div className="col-sm-8 mx-auto text-light bg-secondary">
+    <div>
+      <a className="btn btn-dark float-right mt-4 mr-4" href="/signup">Sign Up</a>
       <h1 className="p-4">Placeholder</h1>
       <ListedPosts />
+    </div>
+  )
+}
+
+
+function SignUp(props) {
+  return (
+    <div>
+      <a className="btn btn-dark float-right mt-4 mr-4" href="/">Home</a>
+      <h1 className="p-4">Sign Up</h1>
     </div>
   )
 }
@@ -83,7 +94,10 @@ function Wall(props) {
 function App() {
   return (
     <Router>
-      <Route exact path="/" component={Wall} />
+      <div className="col-sm-8 mx-auto text-light bg-secondary">
+        <Route exact path="/" component={ Wall } />
+        <Route path="/signup" component={ SignUp } />
+      </div>
     </Router>
   );
 }
