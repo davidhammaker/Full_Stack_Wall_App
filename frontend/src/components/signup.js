@@ -1,4 +1,23 @@
 import React from 'react';
+import axios from 'axios';
+
+
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
 
 
 class SignUpForm extends React.Component {
@@ -35,6 +54,17 @@ class SignUpForm extends React.Component {
   }
 
   handleSubmit(e) {
+    axios.post(
+      'http://localhost:8000/user/create/',
+      {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+      },
+      {
+        headers: {'X-CSRFToken': csrftoken}
+      }
+    );
     e.preventDefault();
   }
 
