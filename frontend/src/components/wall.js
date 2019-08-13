@@ -77,11 +77,11 @@ function Welcome(props) {
   if (token) {
     var username = getCookie('username');
     return (
-      <div className="font-italic mb-2">Welcome, {username}!</div>
+      <div className="font-italic mb-2 d-flex justify-content-center">Welcome, {username}!</div>
     )
   }
   return (
-    <div className="font-italic mb-2">Please log in to post on the wall.</div>
+    <div className="font-italic mb-2 d-flex justify-content-center">Please log in to post on the wall.</div>
   )
 }
 
