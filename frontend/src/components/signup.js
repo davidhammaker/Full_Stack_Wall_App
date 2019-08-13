@@ -95,6 +95,7 @@ class SignUpForm extends React.Component {
       .then(
         (response) => {
           console.log(response);
+          window.location.replace("/complete")
         }
       )
       .catch(

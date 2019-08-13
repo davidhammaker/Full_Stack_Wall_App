@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Wall from './components/wall';
 import SignUp from './components/signup';
+import SignUpComplete from './components/signupcomplete';
 
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     <Router>
       <div className="col-sm-8 mx-auto text-light bg-secondary">
         <Route exact path="/" component={ Wall } />
-        <Route path="/signup" component={ SignUp } />
+        <Route exact path="/signup" component={ SignUp } />
+        <Route path="/complete" component={ SignUpComplete } />
       </div>
     </Router>
   );
