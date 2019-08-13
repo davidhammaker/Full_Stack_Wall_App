@@ -34,9 +34,11 @@ class UserCreate(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         """
-        Send an email upon successful user creation.
+        Hash password and send an email upon successful user creation.
         """
-        serializer.save()
+        new_user = serializer.save()
+        new_user.set_password(new_user.password)
+        new_user.save()
         send_mail(
             'Welcome to Wall App!',
             'Thank you for signing up! You may now log in and post on '
