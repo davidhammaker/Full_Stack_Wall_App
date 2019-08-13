@@ -99,6 +99,7 @@ class LoginForm extends React.Component {
 
     return (
       <form onSubmit={ this.handleSubmit } className="p-4">
+      <Message />
       <small>{ errorMessage }</small>
         <div className="form-group">
           <label>Username:</label>
@@ -123,13 +124,33 @@ class LoginForm extends React.Component {
 }
 
 
+class Message extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: getCookie('message')
+    }
+  }
 
+
+  render() {
+    if (this.state.message) {
+      document.cookie = 'message=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+      return (
+        <small><div className="alert alert-success">{ this.state.message }</div></small>
+      )
+    }
+    return <></>
+  }
+}
 
 
 function Login(props) {
   return (
     <div>
-      <a className="btn btn-dark float-right mt-4 mr-4" href="/">Home</a>
+      <div className="btn-group float-right bg-dark mr-2 rounded sm">
+        <a className="text-light text-decoration-none" href="/"><button className="btn btn-dark">Home</button></a>
+      </div>
       <h1 className="p-4 border border-left-0 border-top-0 border-right-0">Log In</h1>
       <LoginForm />
     </div>
