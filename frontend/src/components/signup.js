@@ -27,7 +27,8 @@ class SignUpForm extends React.Component {
       username: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      errors: []
     }
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -53,24 +54,86 @@ class SignUpForm extends React.Component {
     this.setState({confirmPassword: e.target.value})
   }
 
+
   handleSubmit(e) {
-    axios.post(
-      'http://localhost:8000/user/create/',
-      {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password
-      },
-      {
-        headers: {'X-CSRFToken': csrftoken}
-      }
-    );
+    let allErrors = [];
+    let initialErrors = false;
+
+    if (
+      this.state.username === ''
+      || this.state.email === ''
+      || this.state.password === ''
+      || this.state.confirmPassword === ''
+      ) {
+      allErrors.push('All fields are required.');
+      this.setState((state) => ({
+        errors: allErrors
+      }));
+      initialErrors = true;
+      console.log('Missing field.');
+    }
+    if (this.state.password !== this.state.confirmPassword) {
+      allErrors.push('Passwords must match.');
+      this.setState((state) => ({
+        errors: allErrors
+      }));
+      initialErrors = true;
+      console.log('Passwords do not match.');
+    }
+    if (!initialErrors) {
+      axios.post(
+        'http://localhost:8000/user/create/',
+        {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password
+        },
+        {
+          headers: {'X-CSRFToken': csrftoken}
+        }
+      )
+      .then(
+        (response) => {
+          console.log(response);
+        }
+      )
+      .catch(
+        (errors) => {
+          if(errors) {
+            console.log(errors);
+            allErrors.push("An error occurred. It's likely that another user with that username and/or email address has already been registered.");
+            this.setState((state) => ({
+              errors: allErrors
+            }));
+          }
+        }
+      );
+      console.log('Post attempted.');
+    }
+    else {
+      console.log('Post not attempted.');
+    }
+    console.log(this.state.errors.toString());
     e.preventDefault();
   }
 
   render() {
+    const errors = this.state.errors;
+    let errorMessage;
+
+    if (errors.toString() !== '') {
+      errorMessage = 
+        <div className="alert alert-danger">
+          { errors.map((error) => 
+              <div key={ error } className="ml-2"><strong>{ error }</strong></div>
+            )
+          }
+        </div>
+    }
+
     return (
       <form onSubmit={ this.handleSubmit } className="p-4">
+      <small>{ errorMessage }</small>
         <div className="form-group">
           <label>Username:</label>
           <input
@@ -103,7 +166,7 @@ class SignUpForm extends React.Component {
             onChange={ this.handleConfirmPasswordChange }
             className="form-control" />
         </div>
-        <input type="submit" value="Submit" className="btn btn-info mt-2"/>
+        <input type="submit" value="Submit" className="btn btn-info mt-2" />
       </form>
     )
   }
