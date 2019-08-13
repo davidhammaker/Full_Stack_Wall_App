@@ -77,11 +77,33 @@ function Welcome(props) {
   if (token) {
     var username = getCookie('username');
     return (
-      <div>Welcome, {username}!</div>
+      <div className="font-italic mb-2">Welcome, {username}!</div>
     )
   }
   return (
-    <div>Please log in to post on the wall.</div>
+    <div className="font-italic mb-2">Please log in to post on the wall.</div>
+  )
+}
+
+
+function Links(props) {
+  if (token) {
+    function logOut() {
+      document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      window.location.replace("/");
+    }
+    return (
+      <>
+        <button className="btn btn-dark" onClick={ logOut }>Log Out</button>
+      </>
+    )
+  }
+  return (
+    <>
+      <a className="text-light text-decoration-none" href="/login"><button className="btn btn-dark">Log In</button></a>
+      <a className="text-light text-decoration-none" href="/signup"><button className="btn btn-dark">Sign Up</button></a>
+    </>
   )
 }
 
@@ -90,8 +112,7 @@ function Wall(props) {
   return (
     <div>
       <div className="btn-group float-right bg-dark mr-2 rounded sm">
-        <a className="text-light text-decoration-none" href="/login"><button className="btn btn-dark">Log In</button></a>
-        <a className="text-light text-decoration-none" href="/signup"><button className="btn btn-dark">Sign Up</button></a>
+        <Links />
       </div>
       <h1
         className="display-4 p-4 border border-left-0 border-top-0 border-right-0 clearfix">
