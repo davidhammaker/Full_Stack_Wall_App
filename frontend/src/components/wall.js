@@ -1,5 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import { getCookie } from './utils/cookiefunctions';
+
+
+var token = getCookie('token');
 
 
 function Post(props) {
@@ -69,6 +73,19 @@ class ListedPosts extends React.Component {
 }
 
 
+function Welcome(props) {
+  if (token) {
+    var username = getCookie('username');
+    return (
+      <div>Welcome, {username}!</div>
+    )
+  }
+  return (
+    <div>Please log in to post on the wall.</div>
+  )
+}
+
+
 function Wall(props) {
   return (
     <div>
@@ -80,6 +97,7 @@ function Wall(props) {
         className="display-4 p-4 border border-left-0 border-top-0 border-right-0 clearfix">
           Wall&nbsp;App
       </h1>
+      <Welcome />
       <ListedPosts />
     </div>
   )

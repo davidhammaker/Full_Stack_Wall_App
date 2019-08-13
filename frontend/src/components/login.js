@@ -57,7 +57,10 @@ class LoginForm extends React.Component {
       )
       .then(
         (response) => {
-          console.log(response.data['token']);
+          var token = response.data['token'];
+          document.cookie = `token=${token}`;
+          document.cookie = `username=${this.state.username}`;
+          window.location.replace("/");
         }
       )
       .catch(
