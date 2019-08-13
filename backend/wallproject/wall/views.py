@@ -1,5 +1,6 @@
 import os
 from rest_framework import generics, permissions, filters
+from rest_framework.authentication import TokenAuthentication
 from django.core.mail import send_mail
 from .models import Post
 from .serializers import PostSerializer, UserSerializer
@@ -10,6 +11,7 @@ class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [TokenAuthentication]
 
     filter_backends = [filters.OrderingFilter]
     ordering = ['-date_posted']

@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework.authtoken import views as auth_views
 from . import views as wall_views
 
 urlpatterns = [
@@ -16,5 +17,10 @@ urlpatterns = [
         'user/create/',
         wall_views.UserCreate.as_view(),
         name='user-create'
+    ),
+    path(
+        'api-token-auth/',
+        auth_views.obtain_auth_token,
+        name='api-token-auth'
     )
 ]
