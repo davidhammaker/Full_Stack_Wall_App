@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Wall from './components/wall';
 import SignUp from './components/signup';
 import SignUpComplete from './components/signupcomplete';
+import Login from './components/login';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route exact path="/" component={ Wall } />
         <Route exact path="/signup" component={ SignUp } />
         <Route path="/complete" component={ SignUpComplete } />
+        <Route path="/login" component={ Login } />
       </div>
     </Router>
   );

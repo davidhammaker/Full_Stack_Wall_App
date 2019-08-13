@@ -72,10 +72,13 @@ class ListedPosts extends React.Component {
 function Wall(props) {
   return (
     <div>
-      <a className="btn btn-dark float-right mt-4 mr-4" href="/signup">Sign Up</a>
+      <div className="btn-group float-right bg-dark mr-2 rounded sm">
+        <a className="text-light text-decoration-none" href="/login"><button className="btn btn-dark">Log In</button></a>
+        <a className="text-light text-decoration-none" href="/signup"><button className="btn btn-dark">Sign Up</button></a>
+      </div>
       <h1
-        className="display-4 p-4 border border-left-0 border-top-0 border-right-0">
-          Wall App
+        className="display-4 p-4 border border-left-0 border-top-0 border-right-0 clearfix">
+          Wall&nbsp;App
       </h1>
       <ListedPosts />
     </div>
