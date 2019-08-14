@@ -42,36 +42,16 @@ function Post(props) {
 }
 
 
-class ListedPosts extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {posts: []};
-  }
-
-  componentDidMount() {
-    axios.get('http://localhost:8000')
-    .then(response => {
-      const data = response.data.results;
-      const next = response.data.next;
-      const previous = response.data.previous;
-      this.setState({posts: data});
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }
-
-  render() {
-    return (
-      <div>
-      { 
-        this.state.posts.map((post) => 
-        <Post key={ post.id } post={ post } />
-        ) 
-      }
-      </div>
-    )
-  }
+function ListedPosts(props) {
+  return (
+    <>
+    { 
+      props.posts.map((post) => 
+      <Post key={ post.id } post={ post } />
+      ) 
+    }
+    </>
+  )
 }
 
 
@@ -109,25 +89,150 @@ function Links(props) {
 }
 
 
-function Wall(props) {
+// function Pages(props) {
+//   function choosePage(url) {
+//     props.pageUrl = url;
+//   }
+
+//   var nextPage;
+//   var previousPage;
+
+//   console.log(props.next, props.previous)
+
+//   if (props.next) {
+//     nextPage = <button onClick={ choosePage(props.next) }></button>
+//   }
+  
+//   if (props.previous) {
+//     previousPage = <button onClick={ choosePage(props.previous) }></button>
+//   }
+
+//   return (
+//     <>{ nextPage }{ previousPage }</>
+//   )
+// }
+
+
+function Form(props) {
   var form = <></>
   if (token) {
     form = <PostForm username={ username } token={ token } />
   }
-  return (
-    <div>
-      <div className="btn-group float-right bg-dark mr-2 rounded sm">
-        <Links />
-      </div>
-      <h1
-        className="display-4 p-4 border border-left-0 border-top-0 border-right-0">
-          Wall&nbsp;App
-      </h1>
-      <Welcome />
-      { form }
-      <ListedPosts />
-    </div>
-  )
+  return form
+}
+
+
+class Wall extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      pageUrl: 'http://localhost:8000',
+      next: '',
+      previous: '',
+      buttons: <></>
+    }
+    
+    this.getPosts = this.getPosts.bind(this);
+    this.next = this.next.bind(this);
+    this.previous = this.previous.bind(this);
+    this.updateButtons = this.updateButtons.bind(this);
+  }
+
+  updateButtons() {
+    var nextButton;
+    var previousButton;
+    if (this.state.next) {
+      nextButton =
+        <button
+          className="btn btn-sm btn-info float-right"
+          onClick={ this.next }>
+            Next
+        </button>
+    } else {
+      nextButton =
+        <button
+          className="btn btn-sm btn-info float-right" disabled>
+            Next
+        </button>
+    }
+    if (this.state.previous) {
+      previousButton =
+        <button
+          className="btn btn-sm btn-info"
+          onClick={ this.previous }>
+            Previous
+        </button>
+    } else {
+      previousButton =
+        <button
+          className="btn btn-sm btn-info" disabled>
+            Previous
+        </button>
+    }
+    this.setState({
+      buttons: <>{ nextButton }{ previousButton }</>
+    })
+  }
+
+  getPosts(url) {
+    axios.get(url)
+    .then(response => {
+      const data = response.data.results;
+      const nextPage = response.data.next;
+      const previousPage = response.data.previous;
+      this.setState({
+        posts: data,
+        next: nextPage,
+        previous: previousPage
+      });
+      this.updateButtons();
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  next() {
+    const url = this.state.next;
+    this.setState({
+      pageUrl: this.state.next
+    });
+    this.getPosts(url);
+  }
+
+  previous() {
+    const url = this.state.previous;
+    this.setState({
+      pageUrl: this.state.previous
+    });
+    this.getPosts(url);
+  }
+
+  componentDidMount() {
+    const url = this.state.pageUrl;
+    this.getPosts(url);
+  }
+
+  render () {
+    return (
+      <>
+        <div className="btn-group float-right bg-dark mr-2 rounded sm">
+          <Links />
+        </div>
+        <h1
+          className="display-4 p-4 border border-left-0 border-top-0 border-right-0">
+            Wall&nbsp;App
+        </h1>
+        <Welcome />
+        <Form />
+        <div className="">
+          { this.state.buttons }
+        </div>
+        <ListedPosts posts={ this.state.posts } />
+      </>
+    )
+  }
 }
 
 export default Wall;
