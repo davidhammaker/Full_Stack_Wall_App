@@ -1,45 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import PostForm from './postform';
+import Post from './post';
 import { getCookie } from './utils/cookiefunctions';
 
 
 var token = getCookie('token');
 var username = getCookie('username');
-
-
-function Post(props) {
-  const post = props.post;
-
-  var dateRaw = props.post.date_posted.toString();
-
-  var year = dateRaw.slice(0, 4);
-  var month = dateRaw.slice(5, 7);
-  var day = dateRaw.slice(8, 10);
-  var hourStr = dateRaw.slice(11, 13);
-  var minute = dateRaw.slice(14, 16);
-
-  var hourNum = parseInt(hourStr);
-  var suffix = 'AM';
-  if (hourNum > 12) {
-    suffix = 'PM';
-    hourNum -= 12;
-  }
-  var hour = hourNum.toString();
-  
-  const dateNew = `${hour}:${minute} ${suffix}, ${month}/${day}/${year}`
-
-  return (
-    <div className="p-2">
-      <h5 className="h-100">{ post.creator }
-        <small className="float-right font-italic small-font">
-          { dateNew }
-        </small>
-      </h5>
-      <p className="pl-2 large-font">{ post.content }</p>
-    </div>
-  );
-}
 
 
 function ListedPosts(props) {
