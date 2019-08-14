@@ -11,21 +11,21 @@ var username = getCookie('username');
 function Post(props) {
   const post = props.post;
 
-  let dateRaw = props.post.date_posted.toString();
+  var dateRaw = props.post.date_posted.toString();
 
-  let year = dateRaw.slice(0, 4);
-  let month = dateRaw.slice(5, 7);
-  let day = dateRaw.slice(8, 10);
-  let hourStr = dateRaw.slice(11, 13);
-  let minute = dateRaw.slice(14, 16);
+  var year = dateRaw.slice(0, 4);
+  var month = dateRaw.slice(5, 7);
+  var day = dateRaw.slice(8, 10);
+  var hourStr = dateRaw.slice(11, 13);
+  var minute = dateRaw.slice(14, 16);
 
-  let hourNum = parseInt(hourStr);
-  let suffix = 'AM';
+  var hourNum = parseInt(hourStr);
+  var suffix = 'AM';
   if (hourNum > 12) {
     suffix = 'PM';
     hourNum -= 12;
   }
-  let hour = hourNum.toString();
+  var hour = hourNum.toString();
   
   const dateNew = `${hour}:${minute} ${suffix}, ${month}/${day}/${year}`
 
