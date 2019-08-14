@@ -154,7 +154,9 @@ class SignUpForm extends React.Component {
             onChange={ this.handleConfirmPasswordChange }
             className="form-control" />
         </div>
-        <input type="submit" value="Submit" className="btn btn-info mt-2" />
+        <div className="d-flex justify-content-end">
+          <input type="submit" value="Submit" className="btn btn-info mt-2" />
+        </div>
       </form>
     )
   }
