@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import PostForm from './postform';
 import { getCookie } from './utils/cookiefunctions';
 
 
 var token = getCookie('token');
+var username = getCookie('username');
 
 
 function Post(props) {
@@ -75,7 +77,6 @@ class ListedPosts extends React.Component {
 
 function Welcome(props) {
   if (token) {
-    var username = getCookie('username');
     return (
       <div className="font-italic mb-2 d-flex justify-content-center">Welcome, {username}!</div>
     )
@@ -109,16 +110,21 @@ function Links(props) {
 
 
 function Wall(props) {
+  var form = <></>
+  if (token) {
+    form = <PostForm username={ username } token={ token } />
+  }
   return (
     <div>
       <div className="btn-group float-right bg-dark mr-2 rounded sm">
         <Links />
       </div>
       <h1
-        className="display-4 p-4 border border-left-0 border-top-0 border-right-0 clearfix">
+        className="display-4 p-4 border border-left-0 border-top-0 border-right-0">
           Wall&nbsp;App
       </h1>
       <Welcome />
+      { form }
       <ListedPosts />
     </div>
   )
