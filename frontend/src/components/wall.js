@@ -214,7 +214,7 @@ class Wall extends React.Component {
         </h1>
         <Welcome />
         <Form />
-        <div className="">
+        <div>
           { this.state.buttons }
         </div>
         <ListedPosts posts={ this.state.posts } />
