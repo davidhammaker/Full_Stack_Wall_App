@@ -56,7 +56,6 @@ class SignUpForm extends React.Component {
         errors: allErrors
       }));
       initialErrors = true;
-      console.log('Missing field.');
     }
     if (this.state.password !== this.state.confirmPassword) {
       allErrors.push('Passwords must match.');
@@ -64,7 +63,6 @@ class SignUpForm extends React.Component {
         errors: allErrors
       }));
       initialErrors = true;
-      console.log('Passwords do not match.');
     }
     if (!initialErrors) {
       axios.post(
@@ -80,7 +78,6 @@ class SignUpForm extends React.Component {
       )
       .then(
         (response) => {
-          console.log(response);
           document.cookie = "message=Thank you for signing up! You may now log in.";
           window.location.replace("/login");
         }
@@ -88,7 +85,6 @@ class SignUpForm extends React.Component {
       .catch(
         (errors) => {
           if(errors) {
-            console.log(errors);
             allErrors.push("An error occurred. It's likely that another user with that username and/or email address has already been registered.");
             this.setState((state) => ({
               errors: allErrors
@@ -96,12 +92,7 @@ class SignUpForm extends React.Component {
           }
         }
       );
-      console.log('Post attempted.');
     }
-    else {
-      console.log('Post not attempted.');
-    }
-    console.log(this.state.errors.toString());
     e.preventDefault();
   }
 

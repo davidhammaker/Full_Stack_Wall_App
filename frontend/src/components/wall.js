@@ -58,11 +58,15 @@ function ListedPosts(props) {
 function Welcome(props) {
   if (token) {
     return (
-      <div className="font-italic mb-2 d-flex justify-content-center">Welcome, {username}!</div>
+      <div className="font-italic mb-2 d-flex justify-content-center">
+        Welcome, {username}!
+      </div>
     )
   }
   return (
-    <div className="font-italic mb-2 d-flex justify-content-center">Please log in to post on the wall.</div>
+    <div className="font-italic mb-2 d-flex justify-content-center">
+      Please log in to post on the wall.
+    </div>
   )
 }
 
@@ -82,35 +86,15 @@ function Links(props) {
   }
   return (
     <>
-      <a className="text-light text-decoration-none" href="/login"><button className="btn btn-dark">Log In</button></a>
-      <a className="text-light text-decoration-none" href="/signup"><button className="btn btn-dark">Sign Up</button></a>
+      <a className="text-light text-decoration-none" href="/login">
+        <button className="btn btn-dark">Log In</button>
+      </a>
+      <a className="text-light text-decoration-none" href="/signup">
+        <button className="btn btn-dark">Sign Up</button>
+      </a>
     </>
   )
 }
-
-
-// function Pages(props) {
-//   function choosePage(url) {
-//     props.pageUrl = url;
-//   }
-
-//   var nextPage;
-//   var previousPage;
-
-//   console.log(props.next, props.previous)
-
-//   if (props.next) {
-//     nextPage = <button onClick={ choosePage(props.next) }></button>
-//   }
-  
-//   if (props.previous) {
-//     previousPage = <button onClick={ choosePage(props.previous) }></button>
-//   }
-
-//   return (
-//     <>{ nextPage }{ previousPage }</>
-//   )
-// }
 
 
 function Form(props) {
@@ -187,9 +171,6 @@ class Wall extends React.Component {
         previous: previousPage
       });
       this.updateButtons();
-    })
-    .catch(error => {
-      console.log(error);
     });
   }
 

@@ -42,7 +42,6 @@ class LoginForm extends React.Component {
         errors: allErrors
       }));
       initialErrors = true;
-      console.log('Missing field.');
     }
     if (!initialErrors) {
       axios.post(
@@ -66,7 +65,6 @@ class LoginForm extends React.Component {
       .catch(
         (errors) => {
           if(errors) {
-            console.log(errors);
             allErrors.push("An error occurred.");
             this.setState((state) => ({
               errors: allErrors
@@ -74,12 +72,7 @@ class LoginForm extends React.Component {
           }
         }
       );
-      console.log('Post attempted.');
     }
-    else {
-      console.log('Post not attempted.');
-    }
-    console.log(this.state.errors.toString());
     e.preventDefault();
   }
 
@@ -151,7 +144,11 @@ function Login(props) {
   return (
     <div>
       <div className="btn-group float-right bg-dark mr-2 rounded sm">
-        <a className="text-light text-decoration-none" href="/"><button className="btn btn-dark">Home</button></a>
+        <a className="text-light text-decoration-none" href="/">
+          <button className="btn btn-dark">
+            Home
+          </button>
+        </a>
       </div>
       <h1 className="p-4 border border-left-0 border-top-0 border-right-0">Log In</h1>
       <LoginForm />

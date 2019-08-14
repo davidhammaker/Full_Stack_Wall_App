@@ -33,7 +33,6 @@ class PostForm extends React.Component {
         errors: allErrors
       }));
       initialErrors = true;
-      console.log('Missing field.');
     }
     if (!initialErrors) {
       axios.post(
@@ -52,13 +51,11 @@ class PostForm extends React.Component {
       .then(
         (response) => {
           window.location.replace("/");
-          console.log(response)
         }
       )
       .catch(
         (errors) => {
           if(errors) {
-            console.log(errors);
             allErrors.push("An error occurred.");
             this.setState((state) => ({
               errors: allErrors
@@ -66,12 +63,7 @@ class PostForm extends React.Component {
           }
         }
       );
-      console.log('Post attempted.');
     }
-    else {
-      console.log('Post not attempted.');
-    }
-    console.log(this.state.errors.toString());
     e.preventDefault();
   }
 
