@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PostForm from './postform';
 import Post from './post';
-import { getCookie } from './utils/cookiefunctions';
+import { getCookie, unsetCookie } from './utils/cookiefunctions';
 
 
 var token = getCookie('token');
@@ -48,8 +48,8 @@ function Welcome(props) {
 function Links(props) {
   if (token) {
     function logOut() {
-      document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      unsetCookie('username');
+      unsetCookie('token');
       window.location.replace("/");
     }
     return (
