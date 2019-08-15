@@ -39,8 +39,7 @@ class PostForm extends React.Component {
       axios.post(
         'http://localhost:8000/',
         {
-        token: this.props.username,
-        content: this.state.content
+          content: this.state.content
         },
         {
           headers: {
