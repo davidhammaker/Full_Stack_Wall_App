@@ -4,6 +4,7 @@ import ListedPosts from './listedposts';
 import Welcome from './welcome';
 import Form from './form';
 import Links from './links';
+import { getCookie } from './utils/cookiefunctions';
 
 
 // Render the Wall App where users may view listed posts,
@@ -23,6 +24,9 @@ class Wall extends React.Component {
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.updateButtons = this.updateButtons.bind(this);
+
+    this.token = getCookie('token');
+    this.username = getCookie('username');
   }
 
   updateButtons() {
@@ -101,14 +105,14 @@ class Wall extends React.Component {
     return (
       <>
         <div className="btn-group float-right bg-dark mr-2 rounded sm">
-          <Links />
+          <Links token={ this.token } />
         </div>
         <h1
           className="display-4 p-4 border border-left-0 border-top-0 border-right-0">
             Wall&nbsp;App
         </h1>
-        <Welcome />
-        <Form />
+        <Welcome token={ this.token } username={ this.username } />
+        <Form token={ this.token } username={ this.username } />
         <div>
           { this.state.buttons }
         </div>

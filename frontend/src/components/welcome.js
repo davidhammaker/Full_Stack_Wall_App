@@ -1,18 +1,13 @@
 import React from 'react';
-import { getCookie } from './utils/cookiefunctions';
-
-
-var token = getCookie('token');
-var username = getCookie('username');
 
 
 // If a user is logged in, display a welcome message.
 // Otherwise, ask the user to log in.
 function Welcome(props) {
-  if (token) {
+  if (props.token) {
     return (
       <div className="font-italic mb-2 d-flex justify-content-center">
-        Welcome, {username}!
+        Welcome, {props.username}!
       </div>
     )
   }

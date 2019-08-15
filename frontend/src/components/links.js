@@ -1,14 +1,11 @@
 import React from 'react';
-import { getCookie, unsetCookie } from './utils/cookiefunctions';
-
-
-var token = getCookie('token');
+import { unsetCookie } from './utils/cookiefunctions';
 
 
 // Render 'Log In' and 'Sign Up' links only if a user is not logged in.
 // Otherwise, render a button that will log out a user.
 function Links(props) {
-  if (token) {
+  if (props.token) {
     function logOut() {
       unsetCookie('username');
       unsetCookie('token');
