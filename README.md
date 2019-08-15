@@ -10,6 +10,8 @@ Frontend: https://wall-app-frontend.herokuapp.com/
 
 Backend: https://wall-app-backend.herokuapp.com/
 
+Note: Because these apps are deployed to a free Heroku account, the apps will sleep when inactive. As a result, the Frontend may take a few moments to render the posta from the Backend.
+
 ## Usage
 
 This repository is best suited for development. All 'localhost' references would need to be updated appropriately before deployment. Additionally, debug mode in `settings.py` should be turned off.
