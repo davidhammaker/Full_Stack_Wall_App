@@ -10,7 +10,7 @@ Frontend: https://wall-app-frontend.herokuapp.com/
 
 Backend: https://wall-app-backend.herokuapp.com/
 
-Note: Because these apps are deployed to a free Heroku account, the apps will sleep when inactive. As a result, the Frontend may take a few moments to render the posta from the Backend.
+Note: Because these apps are deployed to a free Heroku account, the apps will sleep when inactive. As a result, the Frontend may take a few moments to render the posts from the Backend.
 
 ## Usage
 
