@@ -5,6 +5,7 @@ import { getCookie } from './utils/cookiefunctions';
 
 
 var csrftoken = getCookie('csrftoken');
+var message = getCookie('message');
 
 
 // Display a form that accepts username and password.
@@ -97,7 +98,7 @@ class LoginForm extends React.Component {
 
     return (
       <form onSubmit={ this.handleSubmit } className="p-4">
-      <Message />
+      <Message message={ message } />
       <small>{ errorMessage }</small>
         <div className="form-group">
           <label>Username:</label>
