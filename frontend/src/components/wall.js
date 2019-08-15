@@ -38,7 +38,7 @@ class Wall extends React.Component {
     } else {
       nextButton =
         <button
-          className="btn btn-sm btn-info float-right" disabled>
+          className="btn btn-sm btn-dark float-right" disabled>
             Next
         </button>
     }
@@ -52,7 +52,7 @@ class Wall extends React.Component {
     } else {
       previousButton =
         <button
-          className="btn btn-sm btn-info" disabled>
+          className="btn btn-sm btn-dark" disabled>
             Previous
         </button>
     }
