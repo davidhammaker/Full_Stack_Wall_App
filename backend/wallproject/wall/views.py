@@ -26,7 +26,11 @@ class PostList(generics.ListCreateAPIView):
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsCreatorOrReadOnly]
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+        IsCreatorOrReadOnly
+    ]
+    authentication_classes = [TokenAuthentication]
 
 
 class UserCreate(generics.CreateAPIView):

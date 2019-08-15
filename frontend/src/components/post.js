@@ -1,4 +1,5 @@
 import React from 'react';
+import Delete from './delete';
 
 
 // Render a single post.
@@ -26,13 +27,19 @@ function Post(props) {
   
   const dateNew = `${hour}:${minute} ${suffix}, ${month}/${day}/${year}`
 
+  var del = <></>;
+  if (props.username === post.creator) {
+    del = <Delete post={ post } token={ props.token }/>;
+  }
+
   return (
-    <div className="p-2">
+    <div className="p-2 mt-4">
       <h5>{ post.creator }
         <small className="float-right font-italic small-font">
           { dateNew }
         </small>
       </h5>
+      { del }
       <p className="pl-2 large-font">{ post.content }</p>
     </div>
   );

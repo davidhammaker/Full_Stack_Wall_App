@@ -116,7 +116,10 @@ class Wall extends React.Component {
         <div>
           { this.state.buttons }
         </div>
-        <ListedPosts posts={ this.state.posts } />
+        <ListedPosts
+          posts={ this.state.posts }
+          token={ this.token }
+          username={ this.username } />
       </>
     )
   }

@@ -8,7 +8,7 @@ function ListedPosts(props) {
       <>
       { 
         props.posts.map((post) => 
-        <Post key={ post.id } post={ post } />
+        <Post key={ post.id } post={ post } token={ props.token } username={ props.username } />
         ) 
       }
       </>
