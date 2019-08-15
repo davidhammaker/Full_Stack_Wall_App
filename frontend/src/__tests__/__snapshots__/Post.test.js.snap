@@ -2,7 +2,7 @@
 
 exports[`displays post correctly 1`] = `
 <div
-  className="p-2"
+  className="p-2 mt-4"
 >
   <h5>
     testUser
