@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays post form correctly 1`] = `
+<form
+  className="pl-4 pr-4 pb-4"
+  onSubmit={[Function]}
+>
+  <small />
+  <div
+    className="form-group"
+  >
+    <label>
+      New Post:
+    </label>
+    <input
+      className="form-control"
+      onChange={[Function]}
+      type="text"
+    />
+  </div>
+  <div
+    className="d-flex justify-content-end"
+  >
+    <input
+      className="btn btn-info mt-2"
+      type="submit"
+      value="Post"
+    />
+  </div>
+</form>
+`;

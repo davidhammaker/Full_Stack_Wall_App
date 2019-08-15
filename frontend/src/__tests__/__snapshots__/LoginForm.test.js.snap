@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays form correctly 1`] = `
+<form
+  className="p-4"
+  onSubmit={[Function]}
+>
+  <small />
+  <div
+    className="form-group"
+  >
+    <label>
+      Username:
+    </label>
+    <input
+      className="form-control"
+      onChange={[Function]}
+      type="text"
+    />
+  </div>
+  <div
+    className="form-group"
+  >
+    <label>
+      Password:
+    </label>
+    <input
+      className="form-control"
+      onChange={[Function]}
+      type="password"
+    />
+  </div>
+  <div
+    className="d-flex justify-content-end"
+  >
+    <input
+      className="btn btn-info mt-2"
+      type="submit"
+      value="Submit"
+    />
+  </div>
+</form>
+`;

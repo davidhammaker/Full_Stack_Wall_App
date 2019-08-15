@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays post correctly 1`] = `
+<div
+  className="p-2"
+>
+  <h5>
+    testUser
+    <small
+      className="float-right font-italic small-font"
+    >
+      12:17 AM, 08/14/2019
+    </small>
+  </h5>
+  <p
+    className="pl-2 large-font"
+  >
+    test 1
+  </p>
+</div>
+`;
