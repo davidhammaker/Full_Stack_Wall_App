@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays form when logged in 1`] = `
+<form
+  className="pl-4 pr-4 pb-4"
+  onSubmit={[Function]}
+>
+  <small />
+  <div
+    className="form-group"
+  >
+    <label>
+      New Post:
+    </label>
+    <input
+      className="form-control"
+      onChange={[Function]}
+      type="text"
+    />
+  </div>
+  <div
+    className="d-flex justify-content-end"
+  >
+    <input
+      className="btn btn-info mt-2"
+      type="submit"
+      value="Post"
+    />
+  </div>
+</form>
+`;
+
+exports[`displays post correctly 1`] = `
+<div
+  className="p-2"
+>
+  <h5>
+    <small
+      className="float-right font-italic small-font"
+    >
+      12:17 AM, 08/14/2019
+    </small>
+  </h5>
+  <p
+    className="pl-2 large-font"
+  >
+    test 1
+  </p>
+</div>
+`;
+
+exports[`displays post form correctly 1`] = `
+<form
+  className="pl-4 pr-4 pb-4"
+  onSubmit={[Function]}
+>
+  <small />
+  <div
+    className="form-group"
+  >
+    <label>
+      New Post:
+    </label>
+    <input
+      className="form-control"
+      onChange={[Function]}
+      type="text"
+    />
+  </div>
+  <div
+    className="d-flex justify-content-end"
+  >
+    <input
+      className="btn btn-info mt-2"
+      type="submit"
+      value="Post"
+    />
+  </div>
+</form>
+`;
