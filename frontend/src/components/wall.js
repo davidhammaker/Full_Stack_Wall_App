@@ -1,85 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import PostForm from './postform';
-import Post from './post';
-import { getCookie, unsetCookie } from './utils/cookiefunctions';
+import ListedPosts from './listedposts';
+import Welcome from './welcome';
+import Form from './form';
+import Links from './links';
 
 
-var token = getCookie('token');
-var username = getCookie('username');
-
-
-function ListedPosts(props) {
-  if (props.posts.toString() !== '') {
-    return (
-      <>
-      { 
-        props.posts.map((post) => 
-        <Post key={ post.id } post={ post } />
-        ) 
-      }
-      </>
-    )
-  }
-  return (
-    <div className="font-italic pb-4 mb-2 d-flex justify-content-center">
-      Nothing has been posted yet.
-    </div>
-  )
-}
-
-
-function Welcome(props) {
-  if (token) {
-    return (
-      <div className="font-italic mb-2 d-flex justify-content-center">
-        Welcome, {username}!
-      </div>
-    )
-  }
-  return (
-    <div className="font-italic mb-2 d-flex justify-content-center">
-      Please log in to post on the wall.
-    </div>
-  )
-}
-
-
-function Links(props) {
-  if (token) {
-    function logOut() {
-      unsetCookie('username');
-      unsetCookie('token');
-      window.location.replace("/");
-    }
-    return (
-      <>
-        <button className="btn btn-dark" onClick={ logOut }>Log Out</button>
-      </>
-    )
-  }
-  return (
-    <>
-      <a className="text-light text-decoration-none" href="/login">
-        <button className="btn btn-dark">Log In</button>
-      </a>
-      <a className="text-light text-decoration-none" href="/signup">
-        <button className="btn btn-dark">Sign Up</button>
-      </a>
-    </>
-  )
-}
-
-
-function Form(props) {
-  var form = <></>
-  if (token) {
-    form = <PostForm username={ username } token={ token } />
-  }
-  return form
-}
-
-
+// Render the Wall App where users may view listed posts,
+// or post their own.
 class Wall extends React.Component {
   constructor(props) {
     super(props);

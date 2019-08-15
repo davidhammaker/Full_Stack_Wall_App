@@ -5,6 +5,7 @@ import SignUp from './components/signup';
 import Login from './components/login';
 
 
+// Render the application with all relevant routes.
 function App() {
   return (
     <Router>

@@ -6,6 +6,7 @@ import { getCookie } from './utils/cookiefunctions';
 var csrftoken = getCookie('csrftoken');
 
 
+// Render a form for submitting posts
 class PostForm extends React.Component {
   constructor(props) {
     super(props);

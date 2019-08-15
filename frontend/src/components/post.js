@@ -1,6 +1,8 @@
 import React from 'react';
 
 
+// Render a single post.
+// In doing this, parse the date into something more reasonable.
 function Post(props) {
   const post = props.post;
 
